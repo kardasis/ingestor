@@ -1,0 +1,9 @@
+{
+  "name": "ingestor",
+  "version": "1.0.0",
+  "description": "for ingesting html/css",
+  "main": "index.js",
+  "author": "ari.kardasis@gmail.com",
+  "license": "MIT",
+  "private": true
+}
