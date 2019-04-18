@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>expand_on-24px-30o</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 24 0 24 24 0 24"></polygon>
+        <polygon id="path-3" points="0 0 24 0 24 24 0 24"></polygon>
+    </defs>
+    <g id="expand_on-24px-30o" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.3">
+        <g id="baseline-zoom_out_map-24px">
+            <g id="Clipped">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="a"></g>
+                <path d="M15,3 L17.3,5.3 L14.41,8.17 L15.83,9.59 L18.7,6.7 L21,9 L21,3 L15,3 Z M9,21 L6.7,18.7 L9.59,15.83 L8.17,14.41 L5.3,17.3 L3,15 L3,21 L9,21 Z" id="Shape" fill="#000000" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            </g>
+            <g id="Clipped">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="a"></g>
+                <polygon id="Path" mask="url(#mask-4)" points="0 0 24 0 24 24 0 24"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
