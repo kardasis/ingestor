@@ -2,7 +2,7 @@
 
 import { parse } from 'node-html-parser'
 import purify from 'purify-css'
-import { hlsa2rgba } from './utils'
+import { hlsa2rgba, pruneNode } from './utils'
 import pretty from 'pretty'
 import yargs from 'yargs'
 import fs from 'fs'
@@ -52,6 +52,9 @@ const cleanColors = (css) => {
 const ingest = function ({ html, selector, cssPath, name, options }) {
   const fileHTML = parse(html)
   const rootNode = fileHTML.querySelector(selector)
+  if (options.omitSelectors) {
+    pruneNode(rootNode, options.omitSelectors)
+  }
   let dirtyCss = purify(rootNode.toString(), [cssPath])
   dirtyCss = removePrefixes(dirtyCss)
   const cleanCss = cleanColors(dirtyCss)
@@ -61,7 +64,7 @@ const ingest = function ({ html, selector, cssPath, name, options }) {
 // eslint-disable-next-line no-unused-expressions
 yargs.scriptName('ingestor')
   .usage('$0 <cmd> [args]')
-  .command('* <name> <htmlPath> <htmlSelector> <cssPath>', 'ingest!!!',
+  .command('* <name> <htmlPath> <htmlSelector> <cssPath> [omitSelectors..]', 'ingest!!!',
     (yargs) => {
       yargs.positional('name', {
         type: 'string',
@@ -75,6 +78,9 @@ yargs.scriptName('ingestor')
       }).positional('cssPath', {
         type: 'string',
         describe: 'glob to css'
+      }).positional('omitSelectors', {
+        type: 'string',
+        describe: 'selectors to be prunded before gathering css'
       })
     }, function (argv) {
       console.log({ argv })
@@ -83,7 +89,9 @@ yargs.scriptName('ingestor')
           console.error(err)
           return
         }
-        const options = {}
+        const options = {
+          omitSelectors: argv.omitSelectors
+        }
         const result = ingest({
           html: data,
           selector: argv.htmlSelector,

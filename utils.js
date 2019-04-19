@@ -21,3 +21,15 @@ export const hlsa2rgba = (h, s, l, a) => {
 
   return [r, g, b, a]
 }
+
+// Prunes matching nodes IN PLACE according to the selctors provided
+export const pruneNode = (root, selectors) => {
+  for (let selector of selectors) {
+    const nodesToPrune = root.querySelectorAll(selector)
+    for (let node of nodesToPrune) {
+      const prunedChildren = node.parentNode.childNodes.filter(n => n !== node)
+      console.log({ node })
+      node.parentNode.childNodes = prunedChildren
+    }
+  }
+}
