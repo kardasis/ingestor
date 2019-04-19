@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "babel-node ./test/ingest.test.js",
+    "test": "jest --config ./jest.conf.js",
+    "test-watch": "jest --config ./jest.conf.js --watch",
     "ingest": "babel-node ./ingest.js"
   },
   "devDependencies": {
@@ -21,7 +22,8 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.7.1"
   },
   "dependencies": {
     "node-html-parser": "^1.1.15",

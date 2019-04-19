@@ -10,14 +10,14 @@ function hue2rgb (p, q, t) {
 export const hlsa2rgba = (h, s, l, a) => {
   let r, g, b
   if (s === 0) {
-    r = g = b = l // achromatic
+    r = g = b = l * 255 // achromatic
   } else {
     var q = l < 0.5 ? l * (1 + s) : l + s - l * s
     var p = 2 * l - q
-    r = Math.round(hue2rgb(p, q, h + 1 / 3))
-    g = Math.round(hue2rgb(p, q, h))
-    b = Math.round(hue2rgb(p, q, h - 1 / 3))
+    r = Math.round(255 * hue2rgb(p, q, h + 1 / 3))
+    g = Math.round(255 * hue2rgb(p, q, h))
+    b = Math.round(255 * hue2rgb(p, q, h - 1 / 3))
   }
 
-  return [r * 255, g * 255, b * 255, a]
+  return [r, g, b, a]
 }
