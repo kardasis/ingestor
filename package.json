@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "babel-node ./test/ingest.test.js"
+    "test": "babel-node ./test/ingest.test.js",
+    "ingest": "babel-node ./ingest.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -25,6 +26,7 @@
   "dependencies": {
     "node-html-parser": "^1.1.15",
     "pretty": "^2.0.0",
-    "purify-css": "^1.2.5"
+    "purify-css": "^1.2.5",
+    "yargs": "^13.2.2"
   }
 }
