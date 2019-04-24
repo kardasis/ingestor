@@ -4,6 +4,7 @@ import { parse } from 'node-html-parser'
 import drop from 'dropcss'
 import { hlsa2rgba, pruneNode } from './utils'
 import pretty from 'pretty'
+import prettyCSS from 'PrettyCSS'
 import yargs from 'yargs'
 import fs from 'fs'
 
@@ -18,7 +19,7 @@ const generateVueFile = (html, css, name) => {
   result += '}\n'
   result += '</script>\n\n'
   result += '<style scoped lang="scss">\n'
-  result += css + '\n'
+  result += prettyCSS.parse(css) + '\n'
   result += '</style>\n'
   return result
 }

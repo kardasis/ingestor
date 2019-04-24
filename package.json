@@ -26,6 +26,7 @@
     "jest": "^24.7.1"
   },
   "dependencies": {
+    "PrettyCSS": "^0.3.19",
     "dropcss": "^1.0.5",
     "node-html-parser": "^1.1.15",
     "pretty": "^2.0.0",
