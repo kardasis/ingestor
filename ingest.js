@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { parse } from 'node-html-parser'
-import purify from 'purify-css'
+import drop from 'dropcss'
 import { hlsa2rgba, pruneNode } from './utils'
 import pretty from 'pretty'
 import yargs from 'yargs'
@@ -49,14 +49,14 @@ const cleanColors = (css) => {
   return css
 }
 
-const ingest = function ({ html, selector, cssPath, name, options }) {
-  const fileHTML = parse(html)
-  const rootNode = fileHTML.querySelector(selector)
+const ingest = function ({ html, selector, css, name, options }) {
+  const rootNode = parse(html).querySelector(selector)
+  console.log({ rootNode })
   if (options.omitSelectors) {
     pruneNode(rootNode, options.omitSelectors)
   }
-  let dirtyCss = purify(rootNode.toString(), [cssPath])
-  dirtyCss = removePrefixes(dirtyCss)
+  let dirtyCss = drop({ css, html: rootNode.toString() })
+  dirtyCss = removePrefixes(dirtyCss.css)
   const cleanCss = cleanColors(dirtyCss)
   return generateVueFile(rootNode.toString(), cleanCss, name)
 }
@@ -83,25 +83,30 @@ yargs.scriptName('ingestor')
         describe: 'selectors to be prunded before gathering css'
       })
     }, function (argv) {
-      console.log({ argv })
-      fs.readFile(argv.htmlPath, 'utf8', (err, data) => {
+      fs.readFile(argv.cssPath, 'utf8', (err, css) => {
         if (err) {
           console.error(err)
           return
         }
-        const options = {
-          omitSelectors: argv.omitSelectors
-        }
-        const result = ingest({
-          html: data,
-          selector: argv.htmlSelector,
-          name: argv.name,
-          cssPath: argv.cssPath,
-          options
-        })
-        fs.writeFile(argv.name + '.vue', result, 'utf8', (err) => {
-          if (err) throw err
-          console.log('The file has been saved!')
+        fs.readFile(argv.htmlPath, 'utf8', (err, html) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+          const options = {
+            omitSelectors: argv.omitSelectors
+          }
+          const result = ingest({
+            html,
+            selector: argv.htmlSelector,
+            name: argv.name,
+            css,
+            options
+          })
+          fs.writeFile(argv.name + '.vue', result, 'utf8', (err) => {
+            if (err) throw err
+            console.log('The file has been saved!')
+          })
         })
       })
     }).help().argv
