@@ -21,12 +21,18 @@ const generateVueFile = (html, css, name) => {
   result += '<style scoped lang="scss">\n'
   result += prettyCSS.parse(css) + '\n'
   result += '</style>\n'
-  return result
+  return result.replace(/\t/g, '  ')
 }
 
 const removePrefixes = (css) => {
+  console.log({ css })
+  css = css.replace(/{([^\n])/g, '{\n$1')
+  css = css.replace(/}([^\n])/g, '}\n$1')
+  css = css.replace(/([^\n])}/g, '$1\n}')
+
   const lines = css.split('\n')
-  const cleanLines = lines.filter(l => !l.includes('-webkit') && !l.includes('--ms'))
+  let cleanLines = lines.filter(l => !l.includes('-webkit') && !l.includes('-ms'))
+  console.log(cleanLines.join('\n'))
   return cleanLines.join('\n')
 }
 
@@ -52,7 +58,6 @@ const cleanColors = (css) => {
 
 const ingest = function ({ html, selector, css, name, options }) {
   const rootNode = parse(html).querySelector(selector)
-  console.log({ rootNode })
   if (options.omitSelectors) {
     pruneNode(rootNode, options.omitSelectors)
   }
