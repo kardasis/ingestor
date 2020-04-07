@@ -25,14 +25,12 @@ const generateVueFile = (html, css, name) => {
 }
 
 const removePrefixes = (css) => {
-  console.log({ css })
   css = css.replace(/{([^\n])/g, '{\n$1')
   css = css.replace(/}([^\n])/g, '}\n$1')
   css = css.replace(/([^\n])}/g, '$1\n}')
 
   const lines = css.split('\n')
   let cleanLines = lines.filter(l => !l.includes('-webkit') && !l.includes('-ms'))
-  console.log(cleanLines.join('\n'))
   return cleanLines.join('\n')
 }
 

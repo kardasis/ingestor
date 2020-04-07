@@ -1,4 +1,4 @@
-import { hlsa2rgba, pruneNode } from '../utils'
+import { hlsa2rgba, pruneNode } from '../src/utils'
 import { parse } from 'node-html-parser'
 
 describe('hlsa2rgba', () => {
