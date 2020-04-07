@@ -9,6 +9,7 @@
     "test": "jest --config ./jest.conf.js",
     "test-watch": "jest --config ./jest.conf.js --watch",
     "ingest": "babel-node ./src/ingest.js",
+    "extract": "babel-node ./src/styleWrapperExtractor.js",
     "build": "babel src -d lib"
   },
   "bin": {
@@ -33,6 +34,7 @@
     "dropcss": "^1.0.5",
     "node-html-parser": "^1.1.15",
     "pretty": "^2.0.0",
+    "vue-sfc-parser": "^0.1.2",
     "yargs": "^13.2.2"
   }
 }
